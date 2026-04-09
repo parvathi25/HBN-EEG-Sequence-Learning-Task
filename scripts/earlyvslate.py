@@ -67,7 +67,6 @@ def file_matches_task_mode(filename, mode):
         raise ValueError("TASK_MODE must be '8', '6', or 'both'.")
 
 
-# Use only the FALLBACK_FRONTAL channels; no 3D‑based selection
 def get_frontal_channels(raw, n_channels=None):
     picks = mne.pick_channels(raw.ch_names, include=FALLBACK_FRONTAL)
     if len(picks) == 0:
@@ -75,7 +74,6 @@ def get_frontal_channels(raw, n_channels=None):
 
     frontal_chs = [raw.ch_names[p] for p in picks]
 
-    # Optionally keep only the first N_FRONTAL_CHANNELS keys from FALLBACK_FRONTAL that exist
     if len(frontal_chs) > N_FRONTAL_CHANNELS:
         frontal_chs = frontal_chs[:N_FRONTAL_CHANNELS]
     elif len(frontal_chs) < N_FRONTAL_CHANNELS:
@@ -225,7 +223,7 @@ if __name__ == "__main__":
     late_vals = []
     used_subjects = []
     summary_rows = []
-    frontal_reference = FALLBACK_FRONTAL  # now fixed across all subjects
+    frontal_reference = FALLBACK_FRONTAL 
 
     print("Files to process:")
     for f in files:
